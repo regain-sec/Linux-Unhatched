@@ -75,13 +75,13 @@ A user may have less permission then group and everyone else.
 
   e.g. -r--rw-rwx systemadmin staff
   
-    The user **systemadmin** can only read the file
+    The user 'systemadmin' can only read the file
     
-    The group **staff** (group that owns the file) can read and write. 
+    The group staff (group that owns the file) can read and write. 
     
     Everyone else can read, write, and execute. 
     
-    It doesn't matter if the user is a member of the owner group; once the permissions have been established, only user's permission are applied. 
+    It doesn't matter if the user is a member of the owner group; once the permissions have been established, only user's permission are           applied. 
 
 **Changing the File Permissions**
 
@@ -139,10 +139,13 @@ A user may have less permission then group and everyone else.
   the first argument is [OWNER TO BE]
   
   the second argument is [FILE]
+
+  Syntax: chown [OWNER TO BE] [FILE]
   
     e.g. chown root hello.sh
     
-      NOTE: to change the ownership of a file or even transfer the ownership, requires **administrative acess**. Therefore, use sudo before the command. 
+      NOTE: to change the ownership of a file or even transfer the ownership, requires **administrative acess**. Therefore, use sudo 
+      the command. 
       
         **sudo chown root hello.sh**
 
@@ -228,4 +231,50 @@ A user may have less permission then group and everyone else.
         
   Both write and execute permissions are required to run mv commmand on both ends. 
 
-  
+**Removing Files**
+
+  'rm' command is used to delete files and directories.
+
+    It is important to note that unlilke in windows based OS, deleted files do not go to a trash can and are almost always deleted
+    permenantly. 
+
+      Syntax:
+
+        rm [FILE]
+
+          e.g. rm linux.txt
+
+          NOTE: Remember, the above syntax can only remove regular "files" and not directories. 
+
+    To remove directories, use '-r' or '-R'. However, it is important to be very careful while doing it as this command will delete directory along with its subdirectories and files. 
+
+      e.g. rm -r School
+
+
+  NOTE: It is important to note that permissions have an impact on these commands. e.g., to delete a file within a directory, a user should have w permission on the directory. Typically, regular users have these persmissions for their home directories and their sub directories. 
+
+**Filtering Input**
+
+  'grep' is used to filter content in a file. 
+
+    Syntax: 
+    
+      grep [OPTIONS] PATTERN [FILE]
+
+        e.g. grep sysadmin passwd
+
+      Options are used to further fine tune the search. 
+
+        e.g. grep -c sysadmin passwd (where -c shows how many lines match)
+
+          Other options include: -i (ignore case-sensitivity), -r -R (search recursively in directories), -n (show line number with matches), -v (invert match - show lines that do not match with the Pattern), -o (show only the matched part), -c (the number of lines matched), -E (use extended regex - more powerful pattern rules). 
+
+            BASIC REGEX CHARACTERS (Default for grep)
+    
+              .	Matches any one single character	gr.p matches: grap, grip, grup
+              [ ]	Matches any one character from the set	gr[aeiou]p matches: grap, grep, etc.
+              [^ ]	Matches anything except characters listed	gr[^a]p matches grip but not grap
+              *	Matches zero or more of the previous character	go*gle matches: ggle, gogle, goooooogle
+              ^	Anchors match to start of line	^error matches only when a line starts with "error"
+              $	Anchors match to end of line	done$ matches only when a line ends with "done"
+
