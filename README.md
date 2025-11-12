@@ -47,7 +47,7 @@ Distros = Ubuntu, CentOS/RHEL, Fedora/Debian etc.
       
       su --
       
-      su -- login
+      su --login
   
   sl is a command that can only be executed with administrative access.
     
@@ -278,3 +278,32 @@ A user may have less permission then group and everyone else.
               ^	Anchors match to start of line	^error matches only when a line starts with "error"
               $	Anchors match to end of line	done$ matches only when a line ends with "done"
 
+**Shutting Down**
+  'shutdown' is a command to safely shut the system down. To run this command, administrative rights are required. Therefore, you may have to use su -, su --, su -l, su --login command to shutdown the system. 
+
+    Syntax:
+
+      shutdown [OPTIONS] TIME [MESSAGE]
+
+      Unlike other commands to bring the system down, shutdown command needs a specific time that could be "NOW", "hh:mm" or "+minutes". 
+
+        e.g.: shutdown NOW
+              
+              OR
+
+              shutdown +5
+
+              OR
+
+              shutdown 01:22
+
+      The time zone your Linux is set could be different from your timezone, therefore, use "date" command to know the time on the Linux (it is displayed as UTC). 
+
+      You can also add a message to the syntax that will appear on the screen to the users before system shuts down. 
+
+        e.g. shutdown +4 "Get Ready for the Next Move"
+
+          ctrl+C is used to bring the screen back to life in Linux. 
+
+    
+      
