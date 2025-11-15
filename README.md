@@ -305,5 +305,160 @@ A user may have less permission then group and everyone else.
 
           ctrl+C is used to bring the screen back to life in Linux. 
 
+**ifconfig**
+  
+  Syntax:
     
+    ifconfig 
+    (if config means interface configuration)
+
+      ifconfig can be used to edit configuration, however, this is usually permanent, and thus, not used for this purpose. 
+
+    iwconfig is similar but for wireless newtwork interfaces.
+
+**ping** is a command sent to another machine. If a reply is received by the sender, it would be able to connect to that machine. The ping command sends packets to the target machine. A packet is an eccapsulated form of data that is sent over network. 
+
+By default, this command will continue sending packets (successful or unsuccessful) unless the process is terminated by ctrl+C. 
+
+  The number of pings sent can be limited by using the option of -c followed by the desired number. 
+
+    e.g. ping -c 6 192.168.2.1
+
+      If the ping command is failed, you will receive a message "Destination is unreachable"
+
+        Ping command can also be failed because some system administrators configure their machine or entire network not to respond to ping as a security  measure. The ping command can also work with a hostname or domain. 
+
+**Viewing Processes**
+
+Running a command results in something called a "process". In Linux, processes are executed on the basis of the previliges of the users who executes the command. This limited the processes to certain capabilities based upon the user identity. 
+
+  Generally, users with administrative previliges can control any user processes including stopping them. 
+
+    Syntax
       
+      ps [OPTIONS]
+
+        The ps command displays the process running in the current terminal by default. 
+
+          "PID" = process identifier - unique to the process. This information is useful for controlling the process by its ID number.
+          "TTY" = The name of the terminal where the process is running. 
+          "TIME"= The total amount of processor time used by the process. 
+          "CMD" = The command that starts the process. 
+
+            Instead of the processes running in the current terminal, you may want to view "every" process. Use -e option. 
+
+              e.g. ps -e
+
+                "-f" is the option used to see more details about the processes running. In the CMD section, you can also view the option used in the command.
+
+                  e.g. ps -ef
+
+**Package Management**
+
+It is a system by which a software can be installed, updated, queried, or removed from a file system. The two most famous package management systems are apt and yum from Debian and RHEL.
+
+  The lowest level of Debian package management system is the "dpkg" command. The front end of this command used is "apt" or "apt-get". 
+
+    A package management system requires administrative rights, and hence, sudo is used before the command. 
+
+      Before isntalling a package, it is recommended to update the current available packages. 
+
+        e.g. sudo apt-get update
+
+              then
+
+                sudo apt-get upgrade
+
+      'apt-cache search [KEYWORD]' is used to find a package with a particular keyword, multiple keywords can be used simulatenously. For example, use cow as a keyword. 
+
+          Once found, a package can be installed using
+
+            'sudo apt-get install [PACKAGE]'
+
+              this command can install new software and update the installed ones. 
+
+      'sudo apt-get purge [PACKAGE]' delete all package file including configuration files. 
+
+      'sudo apt-get remove [PACKAGE]' delete all package files but configuration files. 
+
+**Updating Passwords**
+
+  'passwd' is a command used to update/change a password. A user can change only their password. However, a root user can change anyone's password. 
+
+    Syntax:
+
+      passwd [OPTIONS] [USER]
+      
+        e.g. 'passwd syadmin'
+    
+          To check the status information of your password, use
+
+           Syntax:
+           
+            'passwd -S syadmin'
+
+              The output shows:
+
+                sysadmin P 11/15/2025 0 99999 7 -1
+
+                  Password Status: P = usable password, L = locked paswword, NP = no password
+  
+                  Change Date: Last time the password was changed
+  
+                  Minimum: The minimum number of days before a password can be changed. 
+  
+                  Maximum: The remaining number of days after which a password will be expired. 
+  
+                  Warn: The number of days prior to password expiry the user is warned. 
+  
+                  Inactive: The number of days after password expiry a user account remains active. 
+
+**Types of Redirecting**
+
+  There are three main types of file descriptors:
+    
+    STDIN = Standard inpout is the information the command receives and processes when it is executed. 
+
+    STDOUT = Standard output is the information displayed when a command is executed. 
+
+    STDERR = Standard error messages generated by commands that are not executed correctly. 
+
+      Standard Input (STDIN)
+
+            sysadmin@localhost:~$ ls ~/Documents
+      
+      Standard Output (STDOUT)
+
+            sysadmin@localhost:~$ ls                                                        
+            
+            Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos
+      
+      Standard Error (STDERR)
+
+          sysadmin@localhost:~$ ls fakefile                                               
+          ls: cannot access fakefile: No such file or directory
+
+    Syntax:
+
+        [COMMAND] > [FILE]
+
+          e.g. cat food.txt > newfile1.txt
+
+            The sign of > will overwrite any content in the file. 
+
+              To apend a file, use e.g. cat food.txt >> newfile1.txt
+
+                echo can also be used for redirection. 
+                
+                  e.g. echo "I am a genius" > newfile1.txt 
+
+                  OR
+
+                  echo "I am a genius" >> newfile1.txt
+
+
+NOTE: TO REDIRECT INFORMATION TO AN EXISTING FILE, A USER MUST HAVE W PERMISSION ON THAT. 
+
+**Using the Text Editor**
+
+Vi (Visual) is a universal text editor for Linux/UNIX, available on all distributions. Vim (Vi Improved) adds extra features but works the same. Vi has three modes: Command (move cursor, edit text), Insert (add text), and Ex (save, quit, open files). Key actions include d (delete), y (copy), p (paste), with motions like h, j, k, l for navigation. Insert mode commands (i, a, o) control text insertion. Ex mode (:) handles file operations (:w, :q, :e). Vi is lightweight, terminal-friendly, and stable across decades.
